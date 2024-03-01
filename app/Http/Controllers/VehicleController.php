@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\SiteHelper;
-use App\Models\vehicle;
-use App\Models\Vehicle as ModelsVehicle;
+use App\Models\Vehicle;
 use App\Models\VehicleInsurance;
 use App\Models\VehicleLicense;
 use App\Models\VehicleMechanical;
