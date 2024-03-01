@@ -24,54 +24,5 @@
 <body>
 <!--https://www.jquery-az.com/beautiful-jquery-alerts-with-12-demos-by-using-different-plug-ins/-->
 <!--### Header Start ###-->
-<header class="header home-header">
-    <div class="navbar-container" id="navbar">
-        <nav class="container navbar navbar-expand-lg navbar-light">
-            <a class="navbar-brand " href="#">
-            <h5><b>Vehicle Manager</b></h5>
-                <!-- <img src="{{asset('panel_assets/images/logo.png')}}" alt=""> -->
-            </a>
-
-            <button class="navbar-toggler collapse-btn border-0" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false"
-                    aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarScroll">
-                <ul class="navbar-nav my-2 my-lg-0 navbar-nav-scroll mx-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" aria-current="page" href="#">
-                            Home
-                        </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="#">
-                            About Us
-                        </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="#">
-                            Contact Us
-                        </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            Login
-                        </a>
-                    </li>
-                </ul>
-
-                {{--<a href="#" class="btn default-btn btn-primary text-capitalize me-lg-3 mb-3 mb-lg-0">Get Started</a>--}}
-            </div>
-
-            <div class="dropdown language-list">
-
-            </div>
-        </nav>
-    </div>
-</header>
+<!--  -->
 <!--### Header End ###-->

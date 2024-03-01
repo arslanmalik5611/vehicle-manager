@@ -51,7 +51,6 @@
         </div>
     </div>
 </section>
-@include('layout.home_footer')
 <script type="text/javascript">
     $(document).ready(function () {
         var token = localStorage.getItem("user_token");

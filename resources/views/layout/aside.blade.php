@@ -142,7 +142,7 @@
                 </ul>
             </li> -->
 
-            <li>
+            <li class="logout">
                 <a href="#" class="nav_link logout">
                     <i class='fas fa-sign-out-alt'></i>
                     <span class="nav_name">Log Out</span>
