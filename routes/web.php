@@ -96,6 +96,8 @@ Route::prefix('/driver')->group(function () {
     Route::get('/create', 'App\Http\Controllers\DriverController@create');
     Route::get('/{id}/edit', 'App\Http\Controllers\DriverController@edit');
 });
+Route::prefix('/vendor')->group(function () {
+});
 
 
 
