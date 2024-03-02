@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\ClassController;
+use App\Http\Controllers\DriverController;
 use App\Http\Controllers\FuelLogController;
 use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\UserSessionController;
@@ -29,7 +30,7 @@ use App\Models\Qualification;
 
 Route::prefix('/auth')->group(function () {
     Route::post("/login-backend", [AuthController::class, 'login_backend']);
-    Route::post("/register-backend", [AuthController::class, 'register_backend']);
+    Route::post("/register-backend", [AuthController::class, 'registerBackend']);
 });
 
 
@@ -95,6 +96,15 @@ Route::prefix('/fuel-log')->group(function () {
     Route::post("/get-fuel-log", [FuelLogController::class, 'getFuelLog']);
     Route::post("/update", [FuelLogController::class, 'update']);
     Route::post("/{id}/delete", [FuelLogController::class, 'delete']);
+    
+});
+
+Route::prefix('/driver')->group(function () {
+    Route::get("/", [DriverController::class, 'all']);
+    Route::post("/store", [DriverController::class, 'store']);
+    Route::get("/{id}/show", [DriverController::class, 'show']);
+    Route::post("/update", [DriverController::class, 'update']);
+    Route::post("/{id}/delete", [DriverController::class, 'delete']);
     
 });
 

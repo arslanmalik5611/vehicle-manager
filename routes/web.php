@@ -91,5 +91,11 @@ Route::prefix('/fuel-log')->group(function () {
     Route::get('/{id}/edit', 'App\Http\Controllers\FuelLogController@edit');
 });
 
+Route::prefix('/driver')->group(function () {
+    Route::get('/', 'App\Http\Controllers\DriverController@index');
+    Route::get('/create', 'App\Http\Controllers\DriverController@create');
+    Route::get('/{id}/edit', 'App\Http\Controllers\DriverController@edit');
+});
+
 
 

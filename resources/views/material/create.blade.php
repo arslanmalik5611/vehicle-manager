@@ -9,7 +9,7 @@
                 <h2 class="text-info"><i class="fas fa-plus-circle fa-icon"></i> Create </h2>
             </div>
             <div>
-                <a href="{{env('BASE_URL').'classes'}}" class="btn btn-outline-success btn-sm">Material
+                <a href="{{env('BASE_URL').'material'}}" class="btn btn-outline-success btn-sm">Material
                     List</a>
             </div>
         </div>
@@ -59,6 +59,16 @@
                     <label for="quantity" class="form-label"><span class="required"></span> Quantity </label>
                     <input type="number" class="form-control" id="quantity" name="quantity" placeholder="Enter Quantity" required>
                 </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <!-- <label for="odo_meter" class="form-label"><span class="required"></span>Image </label> -->
+                        <div class="imgUploadDiv ">
+                            <br>
+                            <img class="img-preview" width="100%">
+                            <input type="file" name="image" id="image2" class="form-control imgUpload">
+                        </div>
+                    </div>
+                </div>
 
                 <div class="col-md-6">
                     <label for="name" class="form-label">Notes </label>
@@ -79,11 +89,15 @@
     $(document).ready(function() {
         $("#form-data").on('submit', function(e) {
             e.preventDefault();
+            var formData = new FormData($(this)[0]);
             $.ajax({
                 url: api_url + "material/store",
                 type: "POST",
-                data: $(this).serialize(),
+                // data: $(this).serialize(),
+                data: formData,
                 dataType: "JSON",
+                processData: false, // tell jQuery not to process the data
+                contentType: false, // tell jQuery not to set contentType
                 success: function(data) {
                     if (data.status) {
                         success_notify(data.message);
@@ -94,6 +108,22 @@
                 }
             });
         });
+        $(document).on('change', '.imgUpload', function() {
+            readURL(this);
+        });
+
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function(e) {
+                    previewId = $(input).siblings('.img-preview');
+                    $(previewId).attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
     });
 </script>
 @endsection

@@ -59,7 +59,7 @@
                 {
                     title: "Ending Odometer",
                     render: function(data, type, row, meta) {
-                        return row.ending_odometer ?? '';
+                        return row.ending_odometer + ' ' + (row.odometer_unit ?? '') ?? '';
                     }
                 },
 
@@ -70,7 +70,7 @@
                     }
                 },
                 {
-                    title: "US Gallons",
+                    title: "Liters",
                     render: function(data, type, row, meta) {
                         return (row.us_gallons) ?? 0;
                     }
@@ -84,7 +84,7 @@
                 {
                     title: "US MPG",
                     render: function(data, type, row, meta) {
-                        var us_mpg = parseFloat(row.odometer_changes)/parseFloat(row.total_cost)
+                        var us_mpg = parseFloat(row.odometer_changes) / parseFloat(row.total_cost)
                         return (parseFloat(us_mpg).toFixed(2)) ?? 0;
                     }
                 },
@@ -112,18 +112,32 @@
                 dataType: "JSON",
                 type: "POST",
                 data: {
-                    'vehicle_id' : vehicle_id
+                    'vehicle_id': vehicle_id
                 },
                 success: function(dataSet) {
-                    $('#datatable').DataTable({
-                        dom: 'Bflrtip',
-                        buttons: [
-                            'copy', 'csv', 'pdf', 'print'
-                        ],
-                        data: dataSet.data,
-                        columns: cols
+                    if (dataSet.data.length != 0) {
+                        $('#datatable').DataTable({
+                            dom: 'Bflrtip',
+                            buttons: [
+                                'copy', 'csv', 'pdf', 'print'
+                            ],
+                            data: dataSet.data,
+                            columns: cols
 
-                    });
+                        });
+                    } else {
+                        // console.log('abc');
+                        // $('#datatable').empty();
+                        //clear datatable
+                        // $('#datatable').clear().draw();
+
+                        // //destroy datatable
+                        // $('#datatable').destroy();
+                        alert('No Data Found');
+
+                        // $('#datatable').dataTable().destroy();
+                        // $('#datatable tbody').empty();
+                    }
                 }
             });
         })

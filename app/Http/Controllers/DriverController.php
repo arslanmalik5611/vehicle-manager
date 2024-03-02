@@ -2,84 +2,60 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\driver;
+use App\Models\Driver;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class DriverController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        return view('driver.list');
+    }
+    public function all()
+    {
+        $driver = Driver::orderByDesc('id')->get();
+        return response()->json([
+            'status' => true,
+            'data' => $driver
+        ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        return view('driver.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|unique:drivers,name'
+
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => false,
+                'message' => $validator->errors()->first()
+            ]);
+        }
+
+
+        $driver =  Driver::create([
+            'name' => $request->name,
+        ]);
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Record saved successfully'
+        ]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\driver  $driver
-     * @return \Illuminate\Http\Response
-     */
-    public function show(driver $driver)
+    public function delete(Request $request)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\driver  $driver
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(driver $driver)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\driver  $driver
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, driver $driver)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\driver  $driver
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(driver $driver)
-    {
-        //
+        Driver::where(['id' => $request->id])->delete();
+        return response()->json([
+            'status' => true,
+            'message' => 'Record Deleted Successfully'
+        ]);
     }
 }

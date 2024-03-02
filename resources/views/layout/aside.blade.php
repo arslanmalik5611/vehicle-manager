@@ -34,6 +34,21 @@
             <li class="has-menu">
                 <a href="#" class="nav_link">
                     <i class="fas fa-car"></i>
+                    <span class="nav_name">Drivers</span>
+                </a>
+                <ul class="submenu collapse list-unstyled">
+                    <li class="aside-node">
+                        <a href="{{env('BASE_URL').'driver'}}" class="nav_link">
+                            <i class="fas fa-angle-double-right"></i>
+                            <span class="nav_name">Driver</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="has-menu">
+                <a href="#" class="nav_link">
+                    <i class="fas fa-car"></i>
                     <span class="nav_name">Vehicles</span>
                 </a>
                 <ul class="submenu collapse list-unstyled">

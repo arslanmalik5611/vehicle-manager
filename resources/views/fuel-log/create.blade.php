@@ -40,8 +40,16 @@
                     <input type="date" class="form-control" id="fill_up_date" name="fill_up_date" placeholder="Enter Name" required value="<?php echo date('Y-m-d'); ?>">
                 </div>
                 <div class="col-md-6">
-                    <label for="us_gallons" class="form-label"><span class="required"></span> Us Gallons: </label>
+                    <label for="us_gallons" class="form-label"><span class="required"></span> Liter: </label>
                     <input type="number" class="form-control" id="us_gallons" name="us_gallons">
+                </div>
+
+                <div class="col-md-6">
+                    <label for="Odometer Unit" class="form-label"><span class="required"></span> Odometer Unit: </label>
+                    <select name="odometer_unit" id="odometer_unit" class="select2">
+                        <option value="miles">Miles</option>
+                        <option value="kilometer">Kilometers</option>
+                    </select>
                 </div>
 
                 <div class="col-md-6">
@@ -92,7 +100,7 @@
         $(document).on('keyup', '#ending_odometer', function() {
             var ending_odometer = $(this).val();
             var starting_odometer = $("#starting_odometer").val();
-            var changes_odometer = ending_odometer-starting_odometer;
+            var changes_odometer = ending_odometer - starting_odometer;
             $('#odometer_changes').val(changes_odometer);
             console.log(changes_odometer);
         });

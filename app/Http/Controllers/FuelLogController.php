@@ -62,6 +62,7 @@ class FuelLogController extends Controller
         $FuelLog =  FuelLog::create([
             'vehicle_id' => $request->vehicle_id,
             'fill_up_date' => $request->fill_up_date,
+            'odometer_unit' => $request->odometer_unit,
             'starting_odometer' => $request->starting_odometer,
             'ending_odometer' => $request->ending_odometer,
             'odometer_changes' => $request->ending_odometer-$request->starting_odometer,
@@ -143,6 +144,7 @@ class FuelLogController extends Controller
         $FuelLog = FuelLog::find($request->id);
         if($FuelLog){
             $FuelLog->fill_up_date = $request->fill_up_date;
+            $FuelLog->odometer_unit = $request->odometer_unit;
             $FuelLog->starting_odometer = $request->starting_odometer;
             $FuelLog->ending_odometer = $request->ending_odometer;
             $FuelLog->odometer_changes = $request->ending_odometer-$request->starting_odometer;

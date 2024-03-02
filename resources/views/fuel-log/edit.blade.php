@@ -28,6 +28,14 @@
                 </div>
 
                 <div class="col-md-6">
+                    <label for="Odometer Unit" class="form-label"><span class="required"></span> Odometer Unit: </label>
+                    <select name="odometer_unit" id="odometer_unit" class="form-control">
+                        <option value="miles">Miles</option>
+                        <option value="kilometer">Kilometers</option>
+                    </select>
+                </div>
+
+                <div class="col-md-6">
                     <label for="starting_odometer" class="form-label"><span class="required"></span> Starting Odometer: </label>
                     <input type="number" class="form-control" id="starting_odometer" name="starting_odometer">
                 </div>
@@ -90,6 +98,9 @@
                 $('#fill_up_date').val(response.data.fill_up_date);
                 $('#us_gallons').val(response.data.us_gallons);
                 $('#total_cost').val(response.data.total_cost);
+
+                $(`#odometer_unit option[value=${response.data.odometer_unit}]`).prop("selected", true);
+
                 $('#starting_odometer').val(response.data.starting_odometer);
                 $('#ending_odometer').val(response.data.ending_odometer);
                 $('#odometer_changes').val(response.data.odometer_changes);

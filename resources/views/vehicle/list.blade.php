@@ -36,6 +36,13 @@
                     }
                 },
                 {
+                    title: "Image",
+                    render: function (data, type, row, meta) {
+                        var image = `<image src='${row.image_url}' style="width:50px;height:40px" /> `;
+                        return  image;
+                    }
+                },
+                {
                     title: "Model Year",
                     render: function (data, type, row, meta) {
                         return row.model_year ?? '';
@@ -67,6 +74,7 @@
                         return row.vehicle_type.name ?? '';
                     }
                 },
+                
                
                 {
                     title: "Action",
@@ -89,6 +97,7 @@
                 url: api_url + 'vehicle/',
                 dataType: "JSON",
                 success: function (dataSet) {
+                    
                     $('#datatable').DataTable({
                         dom: 'Bflrtip',
                         buttons: [

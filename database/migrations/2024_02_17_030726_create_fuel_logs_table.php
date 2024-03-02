@@ -19,6 +19,7 @@ class CreateFuelLogsTable extends Migration
             $table->date('fill_up_date')->nullable();
             $table->decimal('us_gallons')->nullable();
             $table->decimal('total_cost')->nullable();
+            $table->string('odometer_unit')->nullable();
             $table->decimal('starting_odometer')->nullable();
             $table->decimal('ending_odometer')->nullable();
             $table->decimal('odometer_changes')->nullable();

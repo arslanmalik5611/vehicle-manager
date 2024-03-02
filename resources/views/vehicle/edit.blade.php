@@ -63,10 +63,15 @@
                 </div>
                 <div class="col-md-3 col-sm-6 col-12">
                     <label for="driver" class="form-label"><span class="required"></span>Driver/Operator </label>
+
+
                     <select name="driver" id="driver" class="form-control driver">
-                        <option value="1">Driver1</option>
-                        <option value="2">Driver2</option>
-                        <option value="3">Driver3</option>
+                        <option value="">Select Driver</option>
+                        @forelse ($Driver as $driver)
+                        <option value="{{$driver['id']}}">{{$driver['name']}}</option>
+                        @empty
+
+                        @endforelse
                     </select>
                 </div>
 
@@ -162,7 +167,7 @@
                     <input type="text" class="form-control" id="account_no" name="account_no" placeholder="">
                 </div>
                 <div class="col-sm-4 col-12">
-                    <label for="premium" class="form-label"><span class="required"></span>Premium </label>
+                    <label for="premium" class="form-label"><span class="required"></span>Price </label>
                     <input type="text" class="form-control" id="premium" name="premium" placeholder="">
                 </div>
                 <div class="col-sm-4 col-12">

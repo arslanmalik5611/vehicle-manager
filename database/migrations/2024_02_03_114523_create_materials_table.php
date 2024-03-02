@@ -18,6 +18,7 @@ class CreateMaterialsTable extends Migration
             $table->string('name')->nullable();
             $table->integer('number')->nullable();
             $table->string('manufacturer')->nullable();
+            $table->string('image')->nullable();
             $table->foreignId('vendor_id')->nullable();
             $table->decimal('price')->nullable();
             $table->foreignId('material_type_id')->nullable();

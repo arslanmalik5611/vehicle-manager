@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\SiteHelper;
+use App\Models\Driver;
 use App\Models\Vehicle;
 use App\Models\VehicleInsurance;
 use App\Models\VehicleLicense;
@@ -31,7 +32,6 @@ class VehicleController extends Controller
             'status' => true,
             'data' => $Vehicle
         ]);
-        return view('vehicle.list');
     }
 
     /**
@@ -41,7 +41,9 @@ class VehicleController extends Controller
      */
     public function create()
     {
-        return view('vehicle.create');
+        $Driver = Driver::all();
+        return view('vehicle.create', ['Driver' => $Driver->toArray()]);
+
     }
 
     /**
@@ -133,7 +135,9 @@ class VehicleController extends Controller
      */
     public function edit(vehicle $vehicle)
     {
-        return view('vehicle.edit');
+        $Driver = Driver::all();
+        
+        return view('vehicle.edit',['Driver' => $Driver->toArray()]);
     }
 
     public function show(Request $request)

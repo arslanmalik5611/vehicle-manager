@@ -21,7 +21,7 @@ class Vehicle extends Model
     }
 
     public function vehicle_insurance(){
-        return $this->hasOne(VehicleInsurance::class);
+        return $this->hasOne(VehicleInsurance::class,);
     }
 
     public function vehicle_mechanical(){

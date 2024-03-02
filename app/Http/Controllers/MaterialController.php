@@ -7,7 +7,7 @@ use App\Models\MaterialType;
 use App\Models\Vendor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-
+use Illuminate\Support\Str;
 
 class MaterialController extends Controller
 {
@@ -22,7 +22,6 @@ class MaterialController extends Controller
             'status' => true,
             'data' => $Material
         ]);
-        return view('Material.list');
     }
 
     public function create()
@@ -44,6 +43,15 @@ class MaterialController extends Controller
                 'message' => $validator->errors()->first()
             ]);
         }
+        if (isset($request->image)) {
+            $picture = $request->file('image');
+            $picture_name = '';
+            if ($picture) {
+                $type = $picture->getClientOriginalExtension();
+                $picture_name = Str::random(10) . '.' . $type;
+                $picture->move(public_path('uploads/vehicle-attachment'), $picture_name);
+            }
+        }
 
 
         $Material =  Material::create([
@@ -54,6 +62,7 @@ class MaterialController extends Controller
             'price' => $request->price,
             'material_type_id' => $request->material_type_id,
             'quantity' => $request->quantity,
+            'image' => $picture_name??'',
             'notes' => $request->notes,
         ]);
 
@@ -63,46 +72,69 @@ class MaterialController extends Controller
         ]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Material  $material
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Material $material)
+    public function edit()
     {
-        //
+        
+        $Vendor = Vendor::all();
+        $Material_type = MaterialType::all();
+
+        return view('material.edit', ['vendor' => $Vendor->toArray(), 'material_type' => $Material_type]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Material  $material
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Material $material)
+    public function show(Request $request)
     {
-        //
+        $Material = Material::find($request->id);
+
+        return response()->json([
+            'status' => true,
+            'data' => $Material
+        ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Material  $material
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Material $material)
+    public function update(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'id' => 'required'
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => false,
+                'message' => $validator->errors()->first()
+            ]);
+        }
+        if (isset($request->image)) {
+            $picture = $request->file('image');
+            $picture_name = '';
+            if ($picture) {
+                $type = $picture->getClientOriginalExtension();
+                $picture_name = Str::random(10) . '.' . $type;
+                $picture->move(public_path('uploads/vehicle-attachment'), $picture_name);
+            }
+        }
+
+
+        $Material =  Material::find($request->id);
+        if($Material){
+
+            $Material->name = $request->name;
+            $Material->number = $request->number;
+            $Material->manufacturer = $request->manufacturer;
+            $Material->vendor_id = $request->vendor_id;
+            $Material->price = $request->price;
+            $Material->material_type_id = $request->material_type_id;
+            $Material->quantity = $request->quantity;
+            $Material->image = $picture_name??'';
+            $Material->save();
+            // 'notes' => $request->notes??,
+        }
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Record updated successfully'
+        ]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Material  $material
-     * @return \Illuminate\Http\Response
-     */
     public function delete(Request $request)
     {
         Material::where(['id' => $request->id])->delete();

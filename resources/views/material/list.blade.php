@@ -35,6 +35,14 @@
                 }
 
             },
+
+            {
+                title: "Image",
+                render: function(data, type, row, meta) {
+                    var image = `<image src='${row.image_url}' style="width:50px;height:40px" /> `;
+                    return image;
+                }
+            },
             {
                 title: "Name",
                 render: function(data, type, row, meta) {
@@ -108,44 +116,44 @@
         });
     });
 
-    $(document).on('click', '.deletebtn', function (e) {
-            thisElem = $(this);
-            id = $(this).attr('data-id');
-            console.log(id);
-            deleteMethod = $(this).attr('data-method');
-            Swal.fire({
-                title: "Are you sure?",
-                text: "You won't be able to revert this!",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonText: "Yes, delete it!"
-            }).then(function (result) {
-                if (result.value) {
-                    $.ajax({
-                        url: api_url + 'material/' + id + '/delete',
-                        type: "POST",
-                        dataType: "JSON",
-                        success: function (response) {
-                            if (response.status) {
-                                $(thisElem).parents('tr').remove();
-                                Swal.fire(
-                                    "Deleted!",
-                                    response.message,
-                                    "success"
-                                )
-                            } else {
-                                Swal.fire(
-                                    "Sorry!",
-                                    "Your record could not deleted.",
-                                    "error"
-                                )
-                            }
-
+    $(document).on('click', '.deletebtn', function(e) {
+        thisElem = $(this);
+        id = $(this).attr('data-id');
+        console.log(id);
+        deleteMethod = $(this).attr('data-method');
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Yes, delete it!"
+        }).then(function(result) {
+            if (result.value) {
+                $.ajax({
+                    url: api_url + 'material/' + id + '/delete',
+                    type: "POST",
+                    dataType: "JSON",
+                    success: function(response) {
+                        if (response.status) {
+                            $(thisElem).parents('tr').remove();
+                            Swal.fire(
+                                "Deleted!",
+                                response.message,
+                                "success"
+                            )
+                        } else {
+                            Swal.fire(
+                                "Sorry!",
+                                "Your record could not deleted.",
+                                "error"
+                            )
                         }
-                    });
 
-                }
-            });
+                    }
+                });
+
+            }
         });
+    });
 </script>
 @endsection
