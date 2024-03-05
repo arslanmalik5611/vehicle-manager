@@ -108,4 +108,8 @@ Route::prefix('/driver')->group(function () {
     
 });
 
+Route::prefix('/setting')->group(function () {
+    Route::post('/update', 'App\Http\Controllers\SettingController@update');
+});
+
 //});
