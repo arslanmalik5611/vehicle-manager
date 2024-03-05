@@ -121,6 +121,21 @@
                 </ul>
             </li>
 
+            <li class="has-menu">
+                <a href="#" class="nav_link">
+                    <i class="fas fa-cog"></i>
+                    <span class="nav_name">General Setting</span>
+                </a>
+                <ul class="submenu collapse list-unstyled">
+                    <li class="aside-node">
+                        <a href="{{env('BASE_URL').'setting'}}" class="nav_link">
+                            <i class="fas fa-angle-double-right"></i>
+                            <span class="nav_name">Setting</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
             <!-- <li class="has-menu">
                 <a href="#" class="nav_link">
                     <i class="fas fa-user"></i>

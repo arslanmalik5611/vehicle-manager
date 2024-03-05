@@ -1,12 +1,12 @@
 @extends('layout.master')
-@section('page_title','User')
+@section('page_title','Vehicle')
 ​
 @section('content')
     <div class="card text-dark shadow-2 mb-3" style="max-width: 18rem;">
         <div class="card-header">
             <div class="d-flex justify-content-between">
                 <div>
-                    <h2 class="text-info"><i class="fas fa-clipboard-list fa-icon"></i> User List </h2>
+                    <h2 class="text-info"><i class="fas fa-clipboard-list fa-icon"></i> Vehicle List </h2>
                 </div>
                 <div>
                     <a href="{{env('BASE_URL').'vehicle/create'}}" class="btn btn-outline-secondary btn-sm">Create

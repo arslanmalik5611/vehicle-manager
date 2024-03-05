@@ -15,7 +15,8 @@ class CreateVehicleInsurancesTable extends Migration
     {
         Schema::create('vehicle_insurances', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('vehicle_id')->constrained();
+            $table->foreignId('vehicle_id')->references('id')->on('vehicles')->onDelete('cascade');
+            // $table->foreignId('vehicle_id')->constrained();
             $table->string('company')->nullable();
             $table->string('account_no')->nullable();
             $table->string('premium')->nullable();

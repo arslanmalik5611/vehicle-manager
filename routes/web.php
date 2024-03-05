@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 Route::get('abc', function () {
     Artisan::call('cache:clear');
     Artisan::call('config:clear');
@@ -26,7 +27,7 @@ Route::get('abc', function () {
     //echo $User->createToken('WEBSITE')->plainTextToken;
 });
 
-Route::get('/clear-cache', function() {
+Route::get('/clear-cache', function () {
     $exitCode = Artisan::call('cache:clear');
     // return what you want
 });
@@ -98,6 +99,7 @@ Route::prefix('/driver')->group(function () {
 });
 Route::prefix('/vendor')->group(function () {
 });
-
-
-
+Route::prefix('/setting')->group(function () {
+    Route::get('/', 'App\Http\Controllers\SettingController@index');
+    Route::post('/update', 'App\Http\Controllers\SettingController@update');
+});

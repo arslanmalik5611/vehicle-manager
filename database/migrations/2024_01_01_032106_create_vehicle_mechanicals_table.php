@@ -15,7 +15,8 @@ class CreateVehicleMechanicalsTable extends Migration
     {
         Schema::create('vehicle_mechanicals', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('vehicle_id')->constrained();
+            // $table->foreignId('vehicle_id')->constrained();
+            $table->foreignId('vehicle_id')->references('id')->on('vehicles')->onDelete('cascade');
             $table->string('transmission')->nullable();
             $table->string('tire_size')->nullable();
             $table->string('engine')->nullable();

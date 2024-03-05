@@ -29,7 +29,7 @@
         <div class="card-body table-responsive" style="padding: 0 !important;overflow: hidden">
             <div class="row justify-content-center; align-items-center">
                 <div class="col-md-5 text-center">
-                <h5><b>Vehicle Manager</b></h5>
+                <h5><b>{{$Setting->home_title}}</b></h5>
                     <!-- <img
                         class="demo-bg"
                         src="{{asset('panel_assets/images/logo.png')}}"
@@ -37,15 +37,7 @@
                     > -->
                     <div id="lab-name">{{env('LAB_NAME')}}</div>
                     <div id="lab-desc-strings">
-                        <p>We provide the highest level of independent expertise in most disciplines of pathology
-                            including <strong>haematology, biochemistry, microbiology, and virology. We have qualified
-                                HCPC registered Biomedical scientist</strong>.</p>
-
-                        <p>We help your <strong>primary care doctors</strong> make a diagnosis about your health or any
-                            medical problems you may have.</p>
-
-                        <p>We use variety of <strong>laboratory tests</strong> to monitor the health of patients with
-                            acute and chronic conditions.</p>
+                        <p>{{$Setting->home_description}}</p>
                     </div>
                     <span id="lab-desc"></span>
 
@@ -54,7 +46,7 @@
                     <div>
                         <img
                             class="demo-bg"
-                            src="{{asset('uploads/vehicle-assets/1.jpg')}}"
+                            src="{{$Setting->home_image}}"
                             alt=""
                         >
                     </div>

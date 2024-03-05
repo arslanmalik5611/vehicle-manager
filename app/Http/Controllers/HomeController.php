@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-
+use App\Models\Setting;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
@@ -11,7 +11,8 @@ class HomeController extends Controller
 {
     public function index()
     {
-        return view('home.index');
+        $Setting = Setting::first();
+        return view('home.index',['Setting'=>$Setting]);
     }
 
     public function makeimage()

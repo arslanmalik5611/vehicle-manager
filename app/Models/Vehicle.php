@@ -4,10 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Vehicle extends Model
 {
     use HasFactory;
+    use SoftDeletes;
     protected $guarded = [];
 
     protected $appends = ['image_url'];
@@ -41,12 +43,20 @@ class Vehicle extends Model
         }
     }
 
-    protected static function booted()
-    {
-        // static::deleting(function ($School) {
-        //     foreach ($Vehicle->insurance as $insurance) {
-        //         $insurance->delete();
-        //     }
-        // });
-    }
+    // protected static function booted()
+    // {
+    //     static::deleting(function ($VehicleInsurance) {
+    //         foreach ($VehicleInsurance->vehicles as $insurance) {
+    //             $insurance->delete();
+    //         }
+
+    //         // foreach ($Vehicle->vehicle_licenses as $licenses) {
+    //         //     $licenses->delete();
+    //         // }
+
+    //         // foreach ($Vehicle->vehicle_mechanicals as $mechanicals) {
+    //         //     $mechanicals->delete();
+    //         // }
+    //     });
+    // }
 }

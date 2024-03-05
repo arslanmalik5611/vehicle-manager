@@ -15,7 +15,8 @@ class CreateVehicleLicensesTable extends Migration
     {
         Schema::create('vehicle_licenses', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('vehicle_id')->constrained();
+            // $table->foreignId('vehicle_id')->constrained();
+            $table->foreignId('vehicle_id')->references('id')->on('vehicles')->onDelete('cascade');
             $table->string('plate_no')->nullable();
             $table->date('renewal')->nullable();
             $table->timestamps();
