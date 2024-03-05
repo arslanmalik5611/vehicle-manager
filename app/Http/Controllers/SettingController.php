@@ -53,7 +53,7 @@ class SettingController extends Controller
         $Setting = Setting::find(1);
         $Setting->home_title = $request->home_title;
         $Setting->home_description = $request->home_description;
-        $Setting->home_image = url("/uploads/vehicle-attachment") ."/". ($picture_name ?? '');
+        $Setting->home_image = url("/public/uploads/vehicle-attachment") ."/". ($picture_name ?? '');
         $Setting->save();
 
         return response()->json([
