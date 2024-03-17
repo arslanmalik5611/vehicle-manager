@@ -51,7 +51,7 @@
             <div class="row mb-3">
                 <div class="col-md-3 col-sm-6 col-12">
                     <label for="phone" class="form-label"><span class="required"></span>Model </label>
-                    <input type="number" class="form-control" id="model" name="model" placeholder="">
+                    <input type="text" class="form-control" id="model" name="model" placeholder="">
                 </div>
                 <div class="col-md-3 col-sm-6 col-12">
                     <label for="vehicle_no" class="form-label"><span class="required"></span>Vehicle # </label>
@@ -191,8 +191,8 @@
 <script type="text/javascript">
     var id = "{{ request()->id }}";
     tinymce_initialize(200);
-    role_load();
-    session_load();
+    // role_load();
+    // session_load();
     show_img();
 
     $(document).ready(function() {

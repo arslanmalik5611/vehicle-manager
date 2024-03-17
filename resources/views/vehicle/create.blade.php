@@ -51,7 +51,7 @@
             <div class="row mb-3">
                 <div class="col-md-3 col-sm-6 col-12">
                     <label for="phone" class="form-label"><span class="required"></span>Model </label>
-                    <input type="number" class="form-control" id="model" name="model" placeholder="">
+                    <input type="text" class="form-control" id="model" name="model" placeholder="">
                 </div>
                 <div class="col-md-3 col-sm-6 col-12">
                     <label for="vehicle_no" class="form-label"><span class="required"></span>Vehicle # </label>
@@ -66,8 +66,8 @@
                     <select name="driver" id="driver" class="select2 driver">
                         <option value="">Select Driver</option>
                         @forelse ($Driver as $driver)
-                            <option value="{{$driver['id']}}">{{$driver['name']}}</option>
-                        @empty 
+                        <option value="{{$driver['id']}}">{{$driver['name']}}</option>
+                        @empty
 
                         @endforelse
                     </select>
@@ -186,20 +186,21 @@
 @section('page_level_scripts')
 <script type="text/javascript">
     $(document).ready(function() {
-        role_load();
-        session_load();
         show_img();
+        console.log(api_url);
+
 
         $("#form-data").on('submit', function(e) {
-            e.preventDefault()
+            e.preventDefault();
+
             var formData = new FormData($(this)[0]);
             $.ajax({
                 url: api_url + "vehicle/store",
                 type: "POST",
                 data: formData,
+                dataType: "JSON",
                 processData: false, // tell jQuery not to process the data
                 contentType: false, // tell jQuery not to set contentType
-                dataType: "JSON",
                 success: function(data) {
                     if (data.status) {
                         success_notify(data.message);

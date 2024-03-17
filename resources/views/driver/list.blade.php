@@ -92,7 +92,7 @@
             }).then(function (result) {
                 if (result.value) {
                     $.ajax({
-                        url: api_url + 'material/' + id + '/delete',
+                        url: api_url + 'driver/' + id + '/delete',
                         type: "POST",
                         dataType: "JSON",
                         success: function (response) {

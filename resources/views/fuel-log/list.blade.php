@@ -39,6 +39,7 @@
     $(document).ready(function() {
         nav_bar_hide();
         $(document).on('change', '#vehicle_id', function() {
+
             var vehicle_id = $('#vehicle_id').val();
 
             var count = 0;
@@ -117,6 +118,7 @@
                 success: function(dataSet) {
                     if (dataSet.data.length != 0) {
                         $('#datatable').DataTable({
+                            "bDestroy": true,
                             dom: 'Bflrtip',
                             buttons: [
                                 'copy', 'csv', 'pdf', 'print'

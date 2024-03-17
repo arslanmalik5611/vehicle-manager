@@ -9,6 +9,7 @@ use App\Models\VehicleInsurance;
 use App\Models\VehicleLicense;
 use App\Models\VehicleMechanical;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
@@ -22,6 +23,8 @@ class VehicleController extends Controller
      */
     public function index()
     {
+        // echo Hash::make('1234');
+        // die();
         return view('vehicle.list');
     }
 
