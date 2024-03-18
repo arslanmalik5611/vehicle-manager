@@ -106,7 +106,7 @@
             ];
 
             $.ajax({
-                url: api_url + 'fuel-log/get-fuel-log/',
+                url: base_url + 'fuel-log/get-fuel-log/',
                 type: "POST",
                 dataType: "JSON",
                 data: {

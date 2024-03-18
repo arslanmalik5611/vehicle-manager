@@ -90,6 +90,8 @@ Route::prefix('/fuel-log')->group(function () {
     Route::get('/', 'App\Http\Controllers\FuelLogController@index');
     Route::get('/create', 'App\Http\Controllers\FuelLogController@create');
     Route::get('/{id}/edit', 'App\Http\Controllers\FuelLogController@edit');
+    Route::post('/get-fuel-log', 'App\Http\Controllers\FuelLogController@getFuelLog');
+
 });
 
 Route::prefix('/driver')->group(function () {
