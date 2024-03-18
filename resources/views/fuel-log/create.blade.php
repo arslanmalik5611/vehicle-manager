@@ -57,10 +57,10 @@
                     <input type="number" class="form-control" id="starting_odometer" name="starting_odometer">
                 </div>
 
-                <div class="col-md-6">
-                    <label for="ending_odometer" class="form-label"><span class="required"></span> Ending Odometer: </label>
-                    <input type="number" class="form-control" id="ending_odometer" name="ending_odometer" value=0>
-                </div>
+                <!-- <div class="col-md-6"> -->
+                    <!-- <label for="ending_odometer" class="form-label"><span class="required"></span> Ending Odometer: </label> -->
+                    <input type="hidden" class="form-control" id="ending_odometer" name="ending_odometer" value=0>
+                <!-- </div> -->
 
                 <div class="col-md-6">
                     <label for="total_cost" class="form-label"><span class="required"></span> Total Cost: </label>
@@ -97,12 +97,11 @@
         //     $('#odometer_changes').val(changes_odometer);
         //     console.log(changes_odometer);
         // });
-        $(document).on('keyup', '#ending_odometer', function() {
+        $(document).on('focusout', '#starting_odometer', function() {
             var ending_odometer = $(this).val();
             var starting_odometer = $("#starting_odometer").val();
-            var changes_odometer = ending_odometer - starting_odometer;
+            var changes_odometer = starting_odometer;
             $('#odometer_changes').val(changes_odometer);
-            console.log(changes_odometer);
         });
         $("#form-data").on('submit', function(e) {
             e.preventDefault();

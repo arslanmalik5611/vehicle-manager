@@ -19,8 +19,6 @@ class FuelLogController extends Controller
         $Vehicle = Vehicle::all();
 
         return view('fuel-log.list', ['Vehicle' => $Vehicle->toArray()]);
-
-
     }
 
     /**
@@ -56,7 +54,7 @@ class FuelLogController extends Controller
                 'message' => $validator->errors()->first()
             ]);
         }
-        
+
 
 
         $FuelLog =  FuelLog::create([
@@ -65,7 +63,7 @@ class FuelLogController extends Controller
             'odometer_unit' => $request->odometer_unit,
             'starting_odometer' => $request->starting_odometer,
             'ending_odometer' => $request->ending_odometer,
-            'odometer_changes' => $request->ending_odometer-$request->starting_odometer,
+            'odometer_changes' => $request->starting_odometer,
             'total_cost' => $request->total_cost,
             'us_gallons' => $request->us_gallons,
             'notes' => $request->notes,
@@ -85,6 +83,13 @@ class FuelLogController extends Controller
      */
     public function getFuelLog(Request $request)
     {
+        if ($request->vehicle_id == 'all') {
+            $FuelLog = FuelLog::all();
+            return response()->json([
+                'status' => true,
+                'data' => $FuelLog ?? Null
+            ]);
+        }
         $validator = Validator::make($request->all(), [
             'vehicle_id' => 'required:integer',
         ]);
@@ -94,11 +99,11 @@ class FuelLogController extends Controller
                 'message' => $validator->errors()->first()
             ]);
         }
-        $FuelLog = FuelLog::where('vehicle_id',$request->vehicle_id)->get();
+        $FuelLog = FuelLog::where('vehicle_id', $request->vehicle_id)->get();
 
         return response()->json([
             'status' => true,
-            'data' => $FuelLog??Null
+            'data' => $FuelLog ?? Null
         ]);
     }
 
@@ -109,7 +114,7 @@ class FuelLogController extends Controller
 
     public function show(Request $request)
     {
-        $FuelLog = FuelLog::find($request->id); 
+        $FuelLog = FuelLog::find($request->id);
 
         return response()->json([
             'status' => true,
@@ -138,21 +143,20 @@ class FuelLogController extends Controller
                 'message' => $validator->errors()->first()
             ]);
         }
-        
+
 
 
         $FuelLog = FuelLog::find($request->id);
-        if($FuelLog){
+        if ($FuelLog) {
             $FuelLog->fill_up_date = $request->fill_up_date;
             $FuelLog->odometer_unit = $request->odometer_unit;
             $FuelLog->starting_odometer = $request->starting_odometer;
             $FuelLog->ending_odometer = $request->ending_odometer;
-            $FuelLog->odometer_changes = $request->ending_odometer-$request->starting_odometer;
+            $FuelLog->odometer_changes = $request->ending_odometer - $request->starting_odometer;
             $FuelLog->total_cost = $request->total_cost;
             $FuelLog->us_gallons = $request->us_gallons;
             $FuelLog->notes = $request->notes;
             $FuelLog->save();
-
         }
 
         return response()->json([

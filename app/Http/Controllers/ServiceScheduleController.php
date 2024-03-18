@@ -20,16 +20,9 @@ class ServiceScheduleController extends Controller
         $ServiceItem = ServiceItem::all();
         $Vehicle = Vehicle::all();
 
-        return view('service-schedule.create', ['Vehicle' => $Vehicle->toArray(),'ServiceItem'=>$ServiceItem->toArray()]);
-
+        return view('service-schedule.create', ['Vehicle' => $Vehicle->toArray(), 'ServiceItem' => $ServiceItem->toArray()]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -45,7 +38,7 @@ class ServiceScheduleController extends Controller
         }
 
         $is_repeat = 0;
-        if($request->is_repeat && $request->is_repeat=='on'){
+        if ($request->is_repeat && $request->is_repeat == 'on') {
             $is_repeat = 1;
         }
         $ServiceSchedule =  ServiceSchedule::create([
@@ -68,53 +61,74 @@ class ServiceScheduleController extends Controller
             'message' => 'Record saved successfully'
         ]);
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\ServiceSchedule  $serviceSchedule
-     * @return \Illuminate\Http\Response
-     */
     public function all(ServiceSchedule $serviceSchedule)
     {
-        $ServiceSchedule = ServiceSchedule::with(['vehicle','service_item'])->get();
+        $ServiceSchedule = ServiceSchedule::with(['vehicle', 'service_item'])->get();
         return response()->json([
             'status' => true,
             'data' => $ServiceSchedule
         ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\ServiceSchedule  $serviceSchedule
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(ServiceSchedule $serviceSchedule)
+    public function edit($id)
     {
-        //
+        $ServiceItem = ServiceItem::all();
+        $Vehicle = Vehicle::all();
+
+        return view('service-schedule.edit', ['Vehicle' => $Vehicle->toArray(), 'ServiceItem' => $ServiceItem->toArray()]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\ServiceSchedule  $serviceSchedule
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, ServiceSchedule $serviceSchedule)
+    public function show($id)
     {
-        //
+        $ServiceSchedule = ServiceSchedule::find($id);
+        return response()->json([
+            'status' => true,
+            'data' => $ServiceSchedule
+        ]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\ServiceSchedule  $serviceSchedule
-     * @return \Illuminate\Http\Response
-     */
+
+    public function update(Request $request)
+    {
+
+        $validator = Validator::make($request->all(), [
+            'vehicle_id' => 'required',
+            'service_item_id' => 'required',
+            'id' => 'required',
+
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => false,
+                'message' => $validator->errors()->first()
+            ]);
+        }
+        $is_repeat = 0;
+        if ($request->is_repeat && $request->is_repeat == 'on') {
+            $is_repeat = 1;
+        }
+        $ServiceSchedule = ServiceSchedule::find($request->id);
+
+        $ServiceSchedule->vehicle_id = $request->vehicle_id;
+        $ServiceSchedule->service_item_id = $request->service_item_id;
+        $ServiceSchedule->is_repeat = $is_repeat;
+        $ServiceSchedule->repeat_times = $request->repeat_times;
+        $ServiceSchedule->repeat_type = $request->repeat_type;
+        $ServiceSchedule->repeat_odometer_units = $request->repeat_odometer_units;
+        $ServiceSchedule->show_reminder = $request->show_reminder;
+        $ServiceSchedule->reminder_type = $request->reminder_type;
+        $ServiceSchedule->reminder_odometer_units = $request->reminder_odometer_units;
+        $ServiceSchedule->next_due_date = $request->next_due_date;
+        $ServiceSchedule->next_due_miles = $request->next_due_miles;
+        $ServiceSchedule->notes = $request->notes;
+        $ServiceSchedule->save();
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Record updated successfully'
+        ]);
+    }
     public function destroy(ServiceSchedule $serviceSchedule)
     {
-        //
     }
 }

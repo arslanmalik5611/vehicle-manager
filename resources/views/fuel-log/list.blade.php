@@ -9,6 +9,7 @@
                 <label for="vehicle_id" class="form-label"><span class="required"></span>Select Vehicle </label>
                 <select name="vehicle_id" id="vehicle_id" class="select2 vehicle_id">
                     <option>Select Vehicle</option>
+                    <option value='all' selected>All Vehicles</option>
                     @foreach ($Vehicle as $vehicles )
                     <option value="{{$vehicles['id']}}">{{$vehicles['vehicle_no'] . ' ' . $vehicles['make']}}</option>
 
@@ -37,11 +38,7 @@
 <script src="{{asset('panel_assets/js/common_datatables.js?v='.date('ymdhis'))}}"></script>
 <script type="text/javascript">
     $(document).ready(function() {
-        nav_bar_hide();
-        $(document).on('change', '#vehicle_id', function() {
-
-            var vehicle_id = $('#vehicle_id').val();
-
+        function fuelLogLoad(vehicle_id) {
             var count = 0;
 
             var cols = [{
@@ -58,9 +55,9 @@
                     }
                 },
                 {
-                    title: "Ending Odometer",
+                    title: "Starting Odometer",
                     render: function(data, type, row, meta) {
-                        return row.ending_odometer + ' ' + (row.odometer_unit ?? '') ?? '';
+                        return row.starting_odometer + ' ' + (row.odometer_unit ?? '') ?? '';
                     }
                 },
 
@@ -128,20 +125,17 @@
 
                         });
                     } else {
-                        // console.log('abc');
-                        // $('#datatable').empty();
-                        //clear datatable
-                        // $('#datatable').clear().draw();
-
-                        // //destroy datatable
-                        // $('#datatable').destroy();
                         alert('No Data Found');
-
-                        // $('#datatable').dataTable().destroy();
-                        // $('#datatable tbody').empty();
                     }
                 }
             });
+        }
+
+        fuelLogLoad('all');
+        nav_bar_hide();
+        $(document).on('change', '#vehicle_id', function() {
+            var vehicle_id = $('#vehicle_id').val();
+            fuelLogLoad(vehicle_id);
         })
 
     });

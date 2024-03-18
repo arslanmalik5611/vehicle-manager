@@ -85,7 +85,7 @@
                 render: function(data, type, row, meta) {
                     var actionBtns = '';
 
-                    actionBtns += `<a href="<?php echo env('BASE_URL') ?>service-item/${row.id}/edit/" class="btn btn-info btn-sm btn-clean btn-icon text-white mb-1" title="Edit Record"
+                    actionBtns += `<a href="<?php echo env('BASE_URL') ?>service-schedule/${row.id}/edit/" class="btn btn-info btn-sm btn-clean btn-icon text-white mb-1" title="Edit Record"
                                     > <i class="fa fa-edit"></i> </a> `;
 
                     actionBtns += `<a href="javascript:;" data-id="${row.id}" data-method='' class="deletebtn btn-danger btn btn-sm btn-clean btn-icon" title="Delete Record">
