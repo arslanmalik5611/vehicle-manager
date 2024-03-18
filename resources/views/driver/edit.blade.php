@@ -19,7 +19,7 @@
             <div class="row mb-3">
                 <div class="col-md-6">
                     <label for="name" class="form-label"><span class="required"></span> Name </label>
-                    <input type="text" class="form-control" id="name" name="name" placeholder="Enter Name" required>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Enter Name" required value="{{$Driver->name}}">
                 </div>
             </div><!--End of row-->
 
@@ -32,23 +32,22 @@
 @endsection
 @section('page_level_scripts')
     <script type="text/javascript">
-        var id = "{{ request()->id }}";
 
-        $(document).ready(function () {
-            $.ajax({
-                url: api_url + `driver/${id}/show`,
-                dataType: "JSON",
-                success: function (response) {
-                    $('#name').val(response.data.name);
-                }
-            });
-        });
+        // $(document).ready(function () {
+        //     $.ajax({
+        //         url: api_url + `driver/${id}/show`,
+        //         dataType: "JSON",
+        //         success: function (response) {
+        //             $('#name').val(response.data.name);
+        //         }
+        //     });
+        // });
 
         $("#form-data").on('submit', function (e) {
             e.preventDefault();
             name = $("#name").val();
             
-            id = $('#id').val();
+            id = "{{ request()->id }}";
             $.ajax({
                 url: api_url + "driver/update",
                 type: "POST",

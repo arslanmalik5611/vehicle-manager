@@ -32,9 +32,6 @@ class ServiceItemController extends Controller
 
     public function create()
     {
-        // $Vendor = Vendor::all();
-        // $Material_type = MaterialType::all();
-
         return view('service-item.create');
     }
 
@@ -53,7 +50,7 @@ class ServiceItemController extends Controller
         }
 
         $is_repeat = 0;
-        if($request->is_repeat && $request->is_repeat=='on'){
+        if ($request->is_repeat && $request->is_repeat == 'on') {
             $is_repeat = 1;
         }
         $ServiceItem =  ServiceItem::create([
@@ -75,46 +72,58 @@ class ServiceItemController extends Controller
         ]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\ServiceItem  $serviceItem
-     * @return \Illuminate\Http\Response
-     */
-    public function show(ServiceItem $serviceItem)
+    public function show($id)
     {
-        //
+        $ServiceItem = ServiceItem::find($id);
+        return response()->json([
+            'status' => true,
+            'data' => $ServiceItem
+        ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\ServiceItem  $serviceItem
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(ServiceItem $serviceItem)
+
+    public function edit($id)
     {
-        //
+        $ServiceItem = ServiceItem::find($id);
+        return view('service-item.edit', compact('ServiceItem'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\ServiceItem  $serviceItem
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, ServiceItem $serviceItem)
+    public function update(Request $request)
     {
-        //
-    }
+        $validator = Validator::make($request->all(), [
+            'id' => 'required',
+            'name' => 'required'
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\ServiceItem  $serviceItem
-     * @return \Illuminate\Http\Response
-     */
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => false,
+                'message' => $validator->errors()->first()
+            ]);
+        }
+
+        $is_repeat = 0;
+        if ($request->is_repeat && $request->is_repeat == 'on') {
+            $is_repeat = 1;
+        }
+        $ServiceItem = ServiceItem::find($request->id);
+            $ServiceItem->name = $request->name;
+            $ServiceItem->material_type_id = $request->material_type_id;
+            $ServiceItem->is_repeat = $is_repeat;
+            $ServiceItem->repeat_times = $request->repeat_times;
+            $ServiceItem->repeat_type = $request->repeat_type;
+            $ServiceItem->repeat_odometer_units = $request->repeat_odometer_units;
+            $ServiceItem->show_reminder_times = $request->show_reminder_times;
+            $ServiceItem->reminder_type = $request->reminder_type;
+            $ServiceItem->reminder_odometer_units = $request->reminder_odometer_units;
+            $ServiceItem->notes = $request->notes;
+            $ServiceItem->save();
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Record Updated successfully'
+        ]);
+    }
     public function delete(Request $request)
     {
         ServiceItem::where(['id' => $request->id])->delete();

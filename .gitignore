@@ -1,4 +1,5 @@
 /vendor/
+/public/uploads/
 vendor-old/
 node_modules/
 npm-debug.log

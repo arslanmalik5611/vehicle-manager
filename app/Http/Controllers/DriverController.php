@@ -50,6 +50,32 @@ class DriverController extends Controller
         ]);
     }
 
+    public function edit($id)
+    {
+        $Driver = Driver::find($id);
+
+        return view('driver.edit', compact('Driver'));
+    }
+
+    public function update(Request $request)
+    {
+        $Driver = Driver::find($request->id);
+        if ($Driver) {
+            $Driver->name = $request->name;
+            $Driver->save();
+
+            return response()->json([
+                'status' => true,
+                'message' => 'Record Updated Successfully'
+            ]);
+        }
+
+        return response()->json([
+            'status' => false,
+            'message' => 'Record Not Found'
+        ]);
+    }
+
     public function delete(Request $request)
     {
         Driver::where(['id' => $request->id])->delete();
