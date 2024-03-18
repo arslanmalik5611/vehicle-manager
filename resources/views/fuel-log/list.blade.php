@@ -40,7 +40,8 @@
     $(document).ready(function() {
         function fuelLogLoad(vehicle_id) {
             var count = 0;
-
+            api_urls = 'https://mydepcon.gr/api/'
+            console.log(api_url);
             var cols = [{
                     title: "SN",
                     render: function(data, type) {
@@ -106,7 +107,7 @@
             ];
 
             $.ajax({
-                url: api_url + 'fuel-log/get-fuel-log/',
+                url: api_urls + 'fuel-log/get-fuel-log/',
                 dataType: "JSON",
                 type: "POST",
                 data: {
