@@ -94,6 +94,7 @@ Route::prefix('/fuel-log')->group(function () {
     Route::post("/store", [FuelLogController::class, 'store']);
     Route::get("/{id}/show", [FuelLogController::class, 'show']);
     Route::post("/get-fuel-log", [FuelLogController::class, 'getFuelLog']);
+    Route::get("/get-fuel-log", [FuelLogController::class, 'getFuelLog']);
     Route::post("/update", [FuelLogController::class, 'update']);
     Route::post("/{id}/delete", [FuelLogController::class, 'delete']);
     
