@@ -23,10 +23,10 @@ class CreateVehiclesTable extends Migration
             $table->string('model')->nullable();
             $table->string('vehicle_no')->nullable();
             $table->string('color')->nullable();
-            $table->foreignId('driver_id')->nullable()->constrained();
-            $table->foreignId('vehicle_type_id')->nullable()->constrained();
+            $table->foreignId('driver_id')->nullable();
+            $table->foreignId('vehicle_type_id')->nullable();
             $table->string('image')->nullable();
-            $table->foreignId('department_id')->nullable()->constrained();
+            $table->foreignId('department_id')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
